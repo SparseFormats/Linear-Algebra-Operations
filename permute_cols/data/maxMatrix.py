@@ -1,0 +1,31 @@
+import numpy as np
+
+#f_in = open("/Users/Pareesa/Desktop/sparse-cortexProject/LinAlgebra/long-sim/March27/data/large.txt","r")
+f_in = open("/Users/Pareesa/Desktop/sparse-cortexProject/LinAlgebra/long-sim/March30/data/a_large.txt","r")
+
+length= map(int, (f_in.readline()).split( ))
+width = map(int, (f_in.readline()).split( ))
+
+nz = 0
+nzRow = 0
+nzRowMax = 0
+maxvalue = 0
+for row in f_in:
+    if (nzRow > nzRowMax):
+        nzRowMax = nzRow
+    nzRow = 0
+    row_int = np.array(map(int, row.split( )))
+    for item in row_int:
+        if (item != 0):
+            nz = nz+1
+            nzRow = nzRow + 1
+            if (item > maxvalue):
+                maxvalue = item
+print nz/float(width[0] * length[0])
+print "nz: "
+print nz
+print "nz in row: "
+print nzRowMax
+print "max"
+print maxvalue
+f_in.close()

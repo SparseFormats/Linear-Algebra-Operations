@@ -1,0 +1,22 @@
+.SUFFIXES: .c .u
+CC= gcc
+CFLAGS  = -g
+LDFLAGS = -lm
+
+
+
+INCLUDES = -I$(CURDIR)/includes -I$(CURDIR)
+COMPILE_C = $(CC) $(CFLAGS) -O2 $(INCLUDES)
+COMMON_SRC := $(wildcard $(CURDIR)/*.c)
+C_SRC := $(wildcard $(CURDIR)/includes/*.c)
+
+compile: sprcomp
+
+run-all: run-sprcomp 
+
+
+sprcomp: $(C_SRC)
+	$(COMPILE_C) $(COMMON_SRC) $(C_SRC) $(CFLAGS) -DSPARSE=$(sparse) -DERR_PR=$(err_pr) -o sc $(LDFLAGS)
+
+clean:
+	-rm -f *.o sc 
